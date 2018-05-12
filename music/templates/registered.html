@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Login</title>
+    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('#tijiao').submit(function (a) {
+            a.preventDefault()
+            var mail = $('#inputEmail').val()
+            var password = $('#inputPassword').val()
+            var verification = $('#Verification').val()
+            var data = {
+                "mail":mail,
+                "password":password,
+                "verification":verification,
+            }
+
+            $.ajax({
+            url:"/registered",
+            type: "post",
+            headers: {
+
+            },
+
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (resp) {
+                if (resp.erro){
+                    $('#sp').html(resp.erro)
+                    $('#flash').css('display','block')
+                }
+                if(resp.email){
+                    alert(resp.email)
+                }
+            }
+        })
+        })
+
+      });
+
+
+    </script>
+
+  </head>
+  <body class="container-fluid " style="background-color: #212529">
+
+  <div class="alert alert-warning alert-dismissible col-lg-5" role="alert" style="margin: auto;display:none" id="flash">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> <span id="sp"></span>
+    </div>
+
+    <form class="form-signin col-lg-3 " style="margin:0px auto" id="tijiao" action="">
+      <div class="text-center mb-4">
+        <a href="/"><img class="mb-4" src="static/logo.png" alt=""  height="150px" style="margin-top: 100px"></a>
+      </div>
+      <div class="form-label-group">
+          <p style="color: white" id="pp">Start registration</p>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputEmail">Email address</label>
+      </div>
+
+      <div class="form-label-group">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="inputPassword">Password</label>
+      </div>
+
+
+        <div class="form-label-group">
+        <input type="password" id="Verification" class="form-control" placeholder="Verification code" required>
+        <label for="inputPassword">Verification code</label>
+      </div>
+
+      <div class="checkbox mb-3">
+
+
+      </div>
+        <button class="btn btn-outline-success my-2 my-sm-0 col-lg-12" type="submit">Registered</button>
+
+      <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+    </form>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+  </body>
+</html>

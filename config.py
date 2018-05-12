@@ -3,12 +3,14 @@
 class Config:
     SECRET_KEY = 'wenchao1026'
     MAIL_SERVER = 'smtp.163.com'
-    MAIL_USE_TLS = True
+    MAIL_USE_TLS = False
+    # MAIL_USE_SSL = True
     MAIL_USERNAME = '15811280010@163.com'
     MAIL_PASSWORD = 'wangyang1026'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASKY_MAIL_SUBJECT_PREFIX = '[LuJiang]'
-    FLASKY_MAIL_SENDER = 'LuJiang <Music>'
+    FLASKY_MAIL_SENDER = '15811280010@163.com'
+
 
 class TestConfig(Config):
     DEBUG = True

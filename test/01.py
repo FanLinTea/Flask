@@ -1,10 +1,9 @@
 #coding:utf8
+'''
 from . import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app
 
 
 class BaseModel(object):
@@ -12,11 +11,6 @@ class BaseModel(object):
     create_time = db.Column(db.DateTime, default=datetime.now)  # 记录的创建时间
     update_time = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)  # 记录的更新时间
 
-
-Collection = db.Table("collection",
-                db.Column("user_id", db.Integer, db.ForeignKey('user.id')),
-                db.Column("music_id", db.Integer, db.ForeignKey('music.id')),
-                db.Column('id',db.Integer,primary_key=True))
 
 class Music(db.Model,BaseModel):
     """音乐"""
@@ -29,26 +23,23 @@ class Music(db.Model,BaseModel):
     # date = db.Column(db.Time)  # 创建时间
     price = db.Column(db.Integer, default=0)    # 价格
     image_url = db.Column(db.String(128), nullable=True)  # 歌曲图片地址
+    # orders = db.relationship("Order", backref="music",lazy='dynamic')
+    comment = db.relationship("Comment", backref=db.backref("music",lazy='joined'),foreign_keys=[Comment.music_id],lazy='dynamic')
 
 
-class User(db.Model,BaseModel,UserMixin):
+class User(db.Model,BaseModel):
     """用户"""
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
     account = db.Column(db.String(64), unique=True)  # 账号
-    password_hash = db.Column(db.String(250))
+    password_hash = db.Column(db.String(64))
     # username = db.Column(db.String(64), unique=True)
     over = db.Column(db.Integer, default=0) # 余额
     avatar_url = db.Column(db.String(128), nullable=True) # 头像地址
     email = db.Column(db.String(64))
-    confirmd = db.Column(db.Boolean, default=False)
-
-    Musics = db.relationship('Music',
-                                secondary=Collection,
-                                backref=db.backref('user', lazy='dynamic'),
-                                lazy='dynamic')
-
+    # orders = db.relationship("Order", backref="user",lazy='dynamic')
+    comment = db.relationship("Comment", backref=db.backref("user",lazy='joined'),foreign_keys=[Comment.user_id],lazy='dynamic')
 
     @property
     def password(self):
@@ -61,29 +52,32 @@ class User(db.Model,BaseModel,UserMixin):
     def verify_password(self,password):  # 验证密码
         return check_password_hash(self.password_hash, password)
 
-    def generate_token(self,expires=3600):
-        s = Serializer(current_app.config['SECRET_KEY'],expires)
-        return s.dumps({'confirm':self.id})
 
-    def confirm(self,token):
-        s = Serializer(current_app.config['SECRET_KEY'])
-        print token
-        try:
-            data = s.loads(token)
-            print data
-        except:
-            return False
-        id = data.get('confirm')
-
-        # self.confirmd = True
-        # db.session.add(self)
-
-        return id
-
-
+#
 # class Collection(db.Model,BaseModel):
-#     '''收藏'''
+#     收藏
 #     __tablename__ = 'collection'
 #     id = db.Column(db.Integer, primary_key=True)
-#     mid = db.Column(db.Integer,db.ForeignKey('User.id'))
-#     uid = db.Column(db.Integer,nullable=False)
+#     music_id = db.Column(db.Integer, db.ForeignKey('music.id'))
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+class Comment(db.Model,BaseModel):
+     评论
+    __tablename__ = 'comment'
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String(258)) #评论
+    # x# user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+# class Order(db.Model,BaseModel):
+#     订单
+#     __tablename__ = 'order'
+#     id = db.Column(db.Integer, primary_key=True)
+#     music_id = db.Column(db.Integer, db.ForeignKey('music.id'),)
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#     status = db.Column(db.Enum(
+#         "WAIT_PAYMENT",  # 待支付
+#         "PAID",  # 已支付
+#         "COMPLETE",  # 已完成
+#         "CANCELED",  # 已取消
+#     ))
+'''

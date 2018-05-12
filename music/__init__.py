@@ -3,7 +3,8 @@ from flask import Flask
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from config import config
-from api_1_0.auth import auth
+
+
 
 db = SQLAlchemy()
 mail = Mail()
@@ -17,6 +18,7 @@ def create_app(config_name):
     mail.init_app(app)
     boots.init_app(app)
 
+    from api_1_0.auth import auth
     app.register_blueprint(auth)
 
     return app
