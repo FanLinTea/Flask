@@ -77,9 +77,13 @@ class User(db.Model,BaseModel,UserMixin):
 
         # self.confirmd = True
         # db.session.add(self)
-
         return id
 
+from . import login
+@login.user_loader
+def load_user(userid):
+    '''当用户登陆后，login通过用户id返回用户对象'''
+    return User.query.get(int(userid))
 
 # class Collection(db.Model,BaseModel):
 #     '''收藏'''

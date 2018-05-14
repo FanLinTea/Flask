@@ -1,26 +1,49 @@
 #coding:utf8
 from . import auth
-from flask import render_template,request,jsonify,flash
+from flask import render_template,request,jsonify,redirect,url_for
 from music.models import User
-from music import db
+from music import db,login
 import re
 from music.email import send_email
+from flask_login import login_user,login_required,current_user,logout_user
 import time
 
 
 @auth.route('/')
 def Home():
     '''首页'''
-    return render_template('loginxxxx.html')
+    return render_template('Home.html')
 
-@auth.route('/login')
+@auth.route('/login',methods=['GET','POST'])
 def login():
     '''登陆'''
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        remember = request.form.get('reme')
+
+        if not all([email,password]):
+            return render_template('login.html',erro=u'请完整填写数据')
+        user = User.query.filter_by(email=email).first()  #  获取当前用户对象
+        if not user:
+            return render_template('login.html',erro=u'此邮箱未注册')
+        if not user.verify_password(password):  #  判断hash密码
+            return render_template('login.html',erro=u'密码错误')
+
+        login_user(user,remember=remember)
+        return redirect(url_for('auth.Home'))
+
     return render_template('login.html')
+
+@auth.route('/logout')
+def logout():
+    logout_user()
+    return '走好，不送'
 
 @auth.route('/registered',methods=['GET','POST'])
 def registered():
     '''注册视图'''
+
     if request.method == 'POST':
         dict_data = request.json  # 接受表单数据
 
@@ -64,13 +87,18 @@ def registered():
 @auth.route('/certified/<token>')
 def certif(token):
     '''验证邮箱的视图'''
-    print token
+
     u = User().confirm(token)  # 获取用户id
-    print u
+
     if not u:
         return render_template('certif.html',erro=u'你未通过认证,请重新注册')
     user = User.query.filter_by(id=u).first()
     user.confirmd = True
     db.session.add(user)
     db.session.commit()
-    return render_template('login.html')
+    return render_template('login.html',ok=u'验证成功，请登陆')
+
+@auth.route('/test')
+@login_required
+def test():
+    return 'OK'
