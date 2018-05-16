@@ -36,9 +36,10 @@ def login():
     return render_template('login.html')
 
 @auth.route('/logout')
+@login_required
 def logout():
     logout_user()
-    return '走好，不送'
+    return render_template('Logout.html')
 
 @auth.route('/registered',methods=['GET','POST'])
 def registered():
@@ -101,4 +102,18 @@ def certif(token):
 @auth.route('/test')
 @login_required
 def test():
-    return 'OK'
+    '''测试登陆装饰器'''
+    return render_template('test.html')
+
+
+@auth.route('/avatar',methods=['GET','POST'])
+@login_required
+def avatar():
+    '''返回头像的视图
+        mark=1：默认头像
+        mark=2:用户上传的头像
+        '''
+    if not current_user.avatar_url and not current_user.account:
+        name = current_user.email
+        return jsonify(name=name,mark='1')
+    pass
