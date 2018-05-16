@@ -30,6 +30,9 @@ def login():
         if not user.verify_password(password):  #  判断hash密码
             return render_template('login.html',erro=u'密码错误')
 
+        if not user.confirmd:
+            return render_template('login.html',erro=u'账号尚未激活')
+
         login_user(user,remember=remember)
         return redirect(url_for('auth.Home'))
 
@@ -113,7 +116,37 @@ def avatar():
         mark=1：默认头像
         mark=2:用户上传的头像
         '''
+    name = current_user.email
+    #  如果用户没有设置头像和昵称，则显示默认图片和邮箱
     if not current_user.avatar_url and not current_user.account:
-        name = current_user.email
         return jsonify(name=name,mark='1')
+
     pass
+
+@auth.route('/personal',methods=['GET','POST'])
+@login_required
+def personal():
+    '''个人信息页面'''
+    if request.method == 'POST':
+        email = current_user.email
+        name = current_user.account
+        avatar_url = current_user.avatar_url
+        over = current_user.over
+        if not name:
+            name = email
+        if not avatar_url:
+            avatar_url = '../static/timg.jpg'
+        return jsonify(name=name,email=email,avatar_url=avatar_url,over=over)
+
+    return render_template('personal.html')
+
+@auth.route('/personal_x',methods=['GET','POST'])
+@login_required
+def personal_x():
+    '''修改个人信息'''
+    avatar_url = current_user.avatar_url
+    if request.method == 'POST':
+        if not avatar_url:
+            avatar_url = '../static/timg.jpg'
+            return jsonify(avatar_url=avatar_url)
+        return jsonify(avatar_url=avatar_url)

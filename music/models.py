@@ -36,7 +36,7 @@ class User(db.Model,BaseModel,UserMixin):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
-    account = db.Column(db.String(64), unique=True)  # 账号
+    account = db.Column(db.String(64), unique=True)  # 角色名
     password_hash = db.Column(db.String(250))
     # username = db.Column(db.String(64), unique=True)
     over = db.Column(db.Integer, default=0) # 余额
