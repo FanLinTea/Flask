@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="xjbg@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="xjbg">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="examples"/>
+    <schema id="4" parent="1" name="fanlin"/>
+    <schema id="5" parent="1" name="flask_ihome"/>
+    <schema id="6" parent="1" name="flask_t3"/>
+    <schema id="7" parent="1" name="information_schema"/>
+    <schema id="8" parent="1" name="Lianxi"/>
+    <schema id="9" parent="1" name="music"/>
+    <schema id="10" parent="1" name="mysql"/>
+    <schema id="11" parent="1" name="performance_schema"/>
+    <schema id="12" parent="1" name="sys"/>
+    <schema id="13" parent="1" name="tast3"/>
+    <schema id="14" parent="1" name="test1"/>
+    <schema id="15" parent="1" name="test2"/>
+    <schema id="16" parent="1" name="test_music"/>
+    <schema id="17" parent="1" name="ttsx_dt"/>
+  </database-model>
+</dataSource>
