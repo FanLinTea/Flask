@@ -6,13 +6,10 @@ from music import db,login
 import re
 from music.email import send_email
 from flask_login import login_user,login_required,current_user,logout_user
+from music.utils.img_qiniu import imp_up
 import time
 
 
-@auth.route('/')
-def Home():
-    '''首页'''
-    return render_template('Home.html')
 
 @auth.route('/login',methods=['GET','POST'])
 def login():
@@ -34,7 +31,7 @@ def login():
             return render_template('login.html',erro=u'账号尚未激活')
 
         login_user(user,remember=remember)
-        return redirect(url_for('auth.Home'))
+        return redirect(url_for('main.Home'))
 
     return render_template('login.html')
 
@@ -116,12 +113,14 @@ def avatar():
         mark=1：默认头像
         mark=2:用户上传的头像
         '''
-    name = current_user.email
+    name = current_user.account
     #  如果用户没有设置头像和昵称，则显示默认图片和邮箱
-    if not current_user.avatar_url and not current_user.account:
-        return jsonify(name=name,mark='1')
-
-    pass
+    avatar = current_user.avatar_url
+    if not name:
+        name = current_user.email
+    if not avatar:
+        avatar = '../static/timg.jpg'
+    return jsonify(name=name,avatar=avatar,mark='1')
 
 @auth.route('/personal',methods=['GET','POST'])
 @login_required
@@ -150,3 +149,33 @@ def personal_x():
             avatar_url = '../static/timg.jpg'
             return jsonify(avatar_url=avatar_url)
         return jsonify(avatar_url=avatar_url)
+
+@auth.route('/personal_b',methods=['POST','GET'])
+@login_required
+def personal_b():
+    if request.method == 'GET':
+        return render_template('personal.html')
+    avatar = request.files.get('avatar').read()
+    new_name = request.form.get('new')
+
+    user = current_user._get_current_object() # 需要提前获得用户对象，用于头像地址的保存判断
+
+    if len(avatar) > 0:
+        # 当用户修改头像时，如果他没有选择头像，那么avatar什么都不会返回，所以不能判断他是不是空值
+        avatar = avatar
+        url_pattern = imp_up(avatar)  #  只有他选择了头像才上传到七牛云
+        user.avatar_url = 'http://p8rknt955.bkt.clouddn.com/' + url_pattern # 只有上传了，才保存头像地址
+    if not new_name:
+        new_name = current_user.account
+        if not new_name:
+            new_name = current_user.email
+
+
+    user.account = new_name
+    db.session.add(user)
+    db.session.commit()
+    # current_user.avatar_url = + avatar
+
+    return render_template('personal.html')
+
+

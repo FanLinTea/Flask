@@ -25,14 +25,14 @@
             data: JSON.stringify(),
             contentType: "application/json",
             success: function (resp) {
-               if (resp.mark == '1'){
-                   $('#login').css('display','none')
+                    if(resp.mark=='1'){
+                         $('#login').css('display','none')
                    $('#avatar').css('display','block')
                    $('#avatar span').html(resp.name)
-               }
-               if(resp.mark=='2'){
-{#                   稍等#}
-               }
+                    $('#avatar img').attr('src',resp.avatar)
+                    }
+
+
             }
         })
 
@@ -44,7 +44,7 @@
     {% block title %}<title>Fanlin</title> {% endblock %}
   </head>
 
-  <body>
+  <body style="background-color: #E6E6FA">
     {% block header %}
      <header style="margin-top: 84px">
       <nav class="navbar navbar-expand-md navbar-dark fixed-top  container-fluid" style="opacity: 0.98;background: #212529;">
@@ -73,7 +73,7 @@
               <ul class="navbar-nav  col-lg-3 " >
                   <li class="nav-item col-lg-12">
                     <a class="nav-link" href="http://127.0.0.1:5000/login" style="width: 60px" id="login">Log in</a>
-                    <a id="avatar" href="/personal" style="display: none" class="nav-link"><img src="../static/timg.jpg" class="rounded-circle" style="height: 44px;max-width: 60px"><span style="margin-left: 20px"></span> </a>
+                    <a id="avatar" href="/personal" style="display: none" class="nav-link"><img src="" class="rounded-circle" style="height: 44px;max-width: 60px"><span style="margin-left: 20px"></span> </a>
                   </li>
               </ul>
 

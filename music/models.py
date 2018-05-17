@@ -39,7 +39,7 @@ class User(db.Model,BaseModel,UserMixin):
     account = db.Column(db.String(64), unique=True)  # 角色名
     password_hash = db.Column(db.String(250))
     # username = db.Column(db.String(64), unique=True)
-    over = db.Column(db.Integer, default=0) # 余额
+    over = db.Column(db.Integer, default=200) # 余额
     avatar_url = db.Column(db.String(128), nullable=True) # 头像地址
     email = db.Column(db.String(64))
     confirmd = db.Column(db.Boolean, default=False)

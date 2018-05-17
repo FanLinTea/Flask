@@ -26,6 +26,12 @@
           $('#but').click(function () {
               $('#mr').css('display','none')
               $('#mr2').css('display','block')
+              var img_data = $('#file').val()
+              var new_name = $('#inputtext').val()
+              var data = {
+                 "img_data":img_data,
+                  "new_name":new_name,
+              }
              $.ajax({
             url:"/personal_x",
             type: "post",
@@ -33,7 +39,7 @@
 
             },
 
-            data: JSON.stringify(),
+            data: JSON.stringify(data),
             contentType: "application/json",
             success: function (resp) {
                    $('#img2').attr('src',resp.avatar_url)
@@ -44,6 +50,7 @@
           $('#file').change(function () {
               $('#img2').attr('src',URL.createObjectURL($(this)[0].files[0]))
           })
+
       });
 
 
@@ -66,25 +73,28 @@
      <h3 align="center" style="margin-top: 50px" id="email">Not set </h3>
     <h6 align="center" style="color: #5cb85c">email</h6>
     <h3 align="center" style="margin-top: 20px" id="over"></h3>
-    <h6 align="center" style="color: #5cb85c">over</h6>
+    <h6 align="center" style="color: #5cb85c">balance</h6>
     <div style="margin: auto;width: 250px;margin-top: 50px">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="width: 250px;" id="but">修改资料</button>
-
     </div>
-    </div>
+        <div style="margin: auto;width: 250px;margin-top: 20px">
+{#    <a href="/logout" style="margin-top: 20px"> <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="width: 250px;" ><span style="color: #9d9d9d">退出登陆</span></button></a>#}
+             <a class="btn btn-outline-secondary col-lg-12" href="/logout">退出登陆</a>
+     </div>
+        </div>
 
     <div style="display: none;" id="mr2">
     <div style="margin: auto;width: 300px;height: 300px;margin-top:7%">
      <img src="" id="img2" class="rounded-circle" style="width: 300px;max-height: 300px;">
         </div>
         <div style="width: 400px;margin: auto;margin-top:3%;">
-        <form id="form-avatar"  enctype="multipart/form-data" style="margin: auto;width: auto">
-        <input type="file" accept="image/*" name="avatar" class="btn btn-outline-success my-2 my-sm-0" style="width: 400px;" id="file">
+        <form id="form-avatar"  enctype="multipart/form-data" style="margin: auto;width: auto" action="/personal_b" method="post">
+        <input type="file" accept="image/*" name="avatar" class="btn btn-outline-success my-2 my-sm-0" style="width: 400px;" id="file" value="1">
             <!--<input type="hidden" id="avatar_xsrf" name="_xsrf" value="">-->
             <p></p>
-            <input type="text" id="inputtext" class="btn btn-outline-success my-2 my-sm-0" placeholder="点击修改昵称" style="width: 400px;margin-top: 5%">
+            <input type="text" id="inputtext" class="btn btn-outline-success my-2 my-sm-0" placeholder="点击修改昵称" style="width: 400px;margin-top: 5%" name="new">
             <p></p>
-            <button class="btn btn-outline-success my-2 my-sm-0 col-lg-12" type="submit" style="margin-top: 5%">修改</button>
+            <button class="btn btn-outline-success my-2 my-sm-0 col-lg-12" type="submit" style="margin-top: 5%" id="but2">修改</button>
         </form>
             </div>
 

@@ -24,8 +24,13 @@ def create_app(config_name):
 
     from api_1_0.auth import auth
     from api_1_0.erro import aerro
+    from api_1_0.main import main
     app.register_blueprint(auth)
     app.register_blueprint(aerro)
+    app.register_blueprint(main)
+
+
+
     login.session_protection = 'strong'
     login.login_view = 'auth.login' # 没有权限的用户，将跳转的登陆页面
     login.init_app(app)
