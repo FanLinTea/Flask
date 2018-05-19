@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block body %}
 
     <div class="rounded" style="width: 100%;background: #202020;">
@@ -7,24 +8,21 @@
 
       </div>
 
-    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=2199364384&auto=0&height=430"></iframe>
-    <audio src="https://www.xiami.com/play?ids=/song/playlist/id/1775015542/object_name/default/object_id/0#loaded" controls="controls">
-    Your browser does not support the audio element.
-    </audio>
-
+    <p>-</p>
    <div style="width: 90%;margin-top: 30px;margin:auto">
 
-   <a class="p-2 text-muted" href="#"><h2>每日推荐 <small>atbt</small></h2></a>
+   <a class="p-2 text-muted" href="#"><h2>随机推荐 <small>atbt</small></h2></a>
      </div>
 
     <div style="margin: auto;width: 90%" class="row">
+        {% for a in daysong_dact %}
 
-        <div class="col-lg-3 " style="display: inline-block;">
+            <div class="col-lg-3 " style="display: inline-block;margin-top: 50px">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="../static/timgsds.jpg" alt="Card image cap">
+                <img class="card-img-top" src="{{ daysong_dact[a][1] }}" alt="Card image cap">
                 <div class="card-body">
-                  <p class="card-text">Music-name</p>
-                    <p class="card-text">Music-role</p>
+                  <p class="card-text">{{ a }}</p>
+                    <p class="card-text">{{ daysong_dact[a][0] }}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
@@ -35,54 +33,7 @@
                 </div>
               </div>
             </div>
-
-        <div class="col-lg-3" style="display: inline-block;">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="http://p8rknt955.bkt.clouddn.com/timg%20%281%29.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-        <div class="col-lg-3" style="display: inline-block;">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-        <div class="col-lg-3" >
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
+        {% endfor %}
     </div>
 
 {% endblock %}
