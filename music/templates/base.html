@@ -36,6 +36,9 @@
             }
         })
 
+{#          $('#Search').submit(function (a) {#}
+{#              a.preventDefault()#}
+{#          })#}
       });
 
 
@@ -66,9 +69,9 @@
               <a class="nav-link " href="#" style="width: 120px">Shopping cart</a>
             </li>
           </ul>
-          <form class="form-inline mt-2 mt-md-0 col-lg-5">
-            <input class="form-control mr-sm-2 col-lg-9" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0 col-lg-2" type="submit">Search</button>
+          <form class="form-inline mt-2 mt-md-0 col-lg-5" action="/search">
+            <input class="form-control mr-sm-2 col-lg-9" type="text" placeholder="搜索音乐" aria-label="Search" name="songn">
+            <button class="btn btn-outline-success my-2 my-sm-0 col-lg-2" type="submit" id="Search">Search</button>
           </form>
               <ul class="navbar-nav  col-lg-3 " >
                   <li class="nav-item col-lg-12">

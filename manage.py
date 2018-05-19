@@ -16,6 +16,6 @@ manager.add_command('db', MigrateCommand)  # 给命令行添加db命令，用来
 
 
 if __name__ == '__main__':
-    print app.url_map
+    # print app.url_map
     manager.run()
 

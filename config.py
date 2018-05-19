@@ -1,4 +1,5 @@
-
+#coding:utf8
+import redis
 
 class Config:
     SECRET_KEY = 'wenchao1026'
@@ -10,7 +11,15 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASKY_MAIL_SUBJECT_PREFIX = '[LuJiang]'
     FLASKY_MAIL_SENDER = '15811280010@163.com'
+    # redis配置
+    REDIS_HOST = "127.0.0.1"
+    REDIS_PORT = 6379
 
+    # sessioin配置
+    SESSION_TYPE = "redis"  # 指定session的保存位置
+    SESSION_USE_SIGNER = True  # 设置sessioin存储签名
+    SESSION_REDIS = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT)
+    PERMANENT_SESSION_LIFETIME = 24 * 3600 * 2  # session的有效时间,单位秒
 
 class TestConfig(Config):
     DEBUG = True

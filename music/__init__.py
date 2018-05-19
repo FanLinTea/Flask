@@ -5,12 +5,14 @@ from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from config import config
 from flask_login import LoginManager
+from flask_session import Session
 
 
 db = SQLAlchemy()
 mail = Mail()
 boots = Bootstrap()
 login = LoginManager()
+session = Session()
 
 
 def create_app(config_name):
@@ -20,6 +22,7 @@ def create_app(config_name):
     db.init_app(app)
     mail.init_app(app)
     boots.init_app(app)
+    session.init_app(app)
 
 
     from api_1_0.auth import auth

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div style="margin: auto;width: 90%" class="row">
+    {% for a in music_list %}
+        {% for b in a %}
+
+
+        <div class="col-lg-3 " style="display: inline-block;margin-top: 50px">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{{ a[b][1] }}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">{{ b }}</p>
+                    <p class="card-text">{{ a[b][0] }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">购买</button>
+                    </div>
+                    <small class="text-muted">2018-9-10</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        {% endfor %}
+    {% endfor %}
+    </div>
+{% endblock %}
