@@ -9,10 +9,11 @@
       </div>
 
     <p>-</p>
-   <div style="width: 90%;margin-top: 30px;margin:auto">
+   <div style="width: 90%;margin:auto;">
 
-   <a class="p-2 text-muted" href="#"><h2>随机推荐 <small>atbt</small></h2></a>
+   <a class="p-2 text-muted" href="#"><h2>猜你喜欢 <small style="font-size: 15px">爱听不听</small></h2></a>
      </div>
+    <div style="height: 1px;width: 90%;background: #303030;margin: auto;box-shadow: 3px 3px 3px #707070"></div>
 
     <div style="margin: auto;width: 90%" class="row">
         {% for a in daysong_dact %}
@@ -23,6 +24,35 @@
                 <div class="card-body">
                   <p class="card-text">{{ a }}</p>
                     <p class="card-text">{{ daysong_dact[a][0] }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">购买</button>
+                    </div>
+                    <small class="text-muted">2018-9-10</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <div style="width: 90%;margin-top: 30px;margin:auto">
+
+   <a class="p-2 text-muted" href="#"><h2>美国Billboard周榜 </h2></a>
+     </div>
+    <div style="height: 1px;width: 90%;background: #303030;margin: auto;box-shadow: 3px 3px 3px #707070"></div>
+
+    <div style="margin: auto;width: 90%" class="row">
+        {% for a in Billboard_list %}
+
+            <div class="col-lg-3 " style="display: inline-block;margin-top: 50px">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{{ Billboard_list[a][1] }}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">{{ a }}</p>
+                    <p class="card-text">{{ Billboard_list[a][0] }}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>

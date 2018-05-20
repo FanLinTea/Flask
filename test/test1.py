@@ -1,6 +1,6 @@
-import random
+import redis
 
-print random.randint(0,1)
+t = redis.StrictRedis()
+t.set('a','bb')
 
-i = {'key':12}
-print len(i)
+print t.get('a')

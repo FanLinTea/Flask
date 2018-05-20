@@ -14,7 +14,7 @@ class Config:
     # redis配置
     REDIS_HOST = "127.0.0.1"
     REDIS_PORT = 6379
-
+    Music_REDIS = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT,db=1)
     # sessioin配置
     SESSION_TYPE = "redis"  # 指定session的保存位置
     SESSION_USE_SIGNER = True  # 设置sessioin存储签名
