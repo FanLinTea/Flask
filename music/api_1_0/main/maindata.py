@@ -2,11 +2,10 @@
 import redis
 
 from . import main
-from flask import render_template, jsonify, request
+from flask import render_template, jsonify, request,redirect,url_for
 import requests
-import random
-import time
-import json
+import random,urllib
+
 
 REDIS_HOST = "127.0.0.1"
 REDIS_PORT = 6379
@@ -35,11 +34,16 @@ def Home():
 
         for ids in daysong1: # 获得随机歌曲的信息
             music_url = requests.get('http://localhost:3000/song/detail?ids=%s' % ids)  # 根据id获取歌曲详情
+            songcnd_url = requests.get('http://localhost:3000/music/url?id=%s' % ids)
+            songcnd_url1 = songcnd_url.json()
             music_url1 = music_url.json()
             song_url = music_url1['songs'][0]['al']['picUrl']  # 拿到歌曲封面url
             song_name = music_url1['songs'][0]['ar'][0]['name']  # 歌手名字
             music_name = music_url1['songs'][0]['name']
-            daysong_dact[music_name] = [song_name, song_url]
+            songcdn = songcnd_url1['data'][0]['url']  #  音乐的url链接
+            song_key = 'song_key%s' %random.randint(0,100000)
+            Music_REDIS.set(song_key, songcdn)
+            daysong_dact[music_name] = [song_name, song_url,song_key]
 
         #  以下是为了获取Billboard榜单的歌曲信息
         Billboard_url = requests.get('http://localhost:3000/top/list?idx=6')
@@ -89,7 +93,8 @@ def search():
 
     return render_template('search.html', music_list=music_list)
 
-# @main.route('/dupdate')
-# def dailyupdate():
-
-    # return '%s'%daysong
+@main.route('/musicplays/<url>/<path:img_url>/<pname>/<songname>')
+def dailyupdate(url,img_url,pname,songname):
+    url = Music_REDIS.get(url)
+    print url
+    return render_template('musicplay.html',url=url,img_url=img_url,pname=pname,songname=songname)

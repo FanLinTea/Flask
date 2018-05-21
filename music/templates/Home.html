@@ -1,4 +1,18 @@
 {% extends "base.html" %}
+{% block ajax %}
+    {{ super() }}
+{#     <script type="text/javascript">#}
+{#      $(function() {#}
+{#         $('#simg').click(function () {#}
+{##}
+{#             alert('ok')#}
+{#         })#}
+{#          $('#simg').mouseover(function () {#}
+{#              #}
+{#          })#}
+{#     })#}
+{#    </script>#}
+{% endblock %}
 
 {% block body %}
 
@@ -20,7 +34,7 @@
 
             <div class="col-lg-3 " style="display: inline-block;margin-top: 50px">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{ daysong_dact[a][1] }}" alt="Card image cap">
+                <a href="/musicplays/{{ daysong_dact[a][2] }}/{{ daysong_dact[a][1] }}/{{ a }}/{{ daysong_dact[a][0] }}" target='_blank'><img class="card-img-top" src="{{ daysong_dact[a][1] }}" alt="Card image cap" id="simg"></a>
                 <div class="card-body">
                   <p class="card-text">{{ a }}</p>
                     <p class="card-text">{{ daysong_dact[a][0] }}</p>
@@ -40,7 +54,7 @@
 
     <div style="width: 90%;margin-top: 30px;margin:auto">
 
-   <a class="p-2 text-muted" href="#"><h2>美国Billboard周榜 </h2></a>
+   <a class="p-2 text-muted" href="#"><h2>美国Billboard周榜 <small>不给你听</small></h2></a>
      </div>
     <div style="height: 1px;width: 90%;background: #303030;margin: auto;box-shadow: 3px 3px 3px #707070"></div>
 

@@ -1,0 +1,26 @@
+{
+  "name": "Flask",
+  "version": "1.0.0",
+  "description": "Flask-lianxi 用来练习的音乐网站，数据用 https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi  获取的，如果你想运行这个半成品的程序，你需要先安装这个网址提供的程序.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FanLinTea/Flask.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FanLinTea/Flask/issues"
+  },
+  "homepage": "https://github.com/FanLinTea/Flask#readme",
+  "dependencies": {
+    "aplayer": "^1.10.1"
+  }
+}

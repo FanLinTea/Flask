@@ -103,7 +103,7 @@ def certif(token):
 @login_required
 def test():
     '''测试登陆装饰器'''
-    return render_template('test.html')
+    return render_template('musicplay.html')
 
 
 @auth.route('/avatar',methods=['GET','POST'])
