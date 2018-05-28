@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 {% block ajax %}
     {{ super() }}
-{#     <script type="text/javascript">#}
-{#      $(function() {#}
-{#         $('#simg').click(function () {#}
-{##}
-{#             alert('ok')#}
-{#         })#}
-{#          $('#simg').mouseover(function () {#}
-{#              #}
-{#          })#}
-{#     })#}
-{#    </script>#}
+     <script type="text/javascript">
+      $(function() {
+
+        $('.btn').click(function () {
+            $(this).html($(this).html().replace(/收藏/,""))
+            $(this).find('i').addClass("fa fa-heart col-lg-12")
+
+            var id = $(this).val()
+           $.post(
+                "/collection",      //url地址
+                {
+                   id:id
+
+                },
+                function(data){ //回传函数
+                      if (data.erro=='nologin') {//根据返回值进行跳转
+            window.location.href = '/login';}
+                })
+        })
+
+     })
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -34,16 +45,16 @@
 
             <div class="col-lg-3 " style="display: inline-block;margin-top: 50px">
               <div class="card mb-4 box-shadow">
-                <a href="/musicplays/{{ daysong_dact[a][2] }}/{{ daysong_dact[a][1] }}/{{ a }}/{{ daysong_dact[a][0] }}" target='_blank'><img class="card-img-top" src="{{ daysong_dact[a][1] }}" alt="Card image cap" id="simg"></a>
+                <a href="/musicplays/{{ daysong_dact[a][2] }}/{{ daysong_dact[a][3] }}/{{ a }}/{{ daysong_dact[a][0] }}" target='_blank'><img class="card-img-top" src="{{ daysong_dact[a][1] }}" alt="Card image cap" id="simg"></a>
                 <div class="card-body">
                   <p class="card-text">{{ a }}</p>
                     <p class="card-text">{{ daysong_dact[a][0] }}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">购买</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" value="{{ daysong_dact[a][4] }}">收藏<i></i></button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" value="{{ daysong_dact[a][4] }}">购买</button>
                     </div>
-                    <small class="text-muted">2018-9-10</small>
+                    <small class="text-muted">2018-5-10</small>
                   </div>
                 </div>
               </div>
@@ -69,7 +80,7 @@
                     <p class="card-text">{{ Billboard_list[a][0] }}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" >收藏</button>
                       <button type="button" class="btn btn-sm btn-outline-secondary">购买</button>
                     </div>
                     <small class="text-muted">2018-9-10</small>

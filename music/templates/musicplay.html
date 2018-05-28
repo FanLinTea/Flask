@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
       <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-      <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 
     <script type="text/javascript">
 
@@ -25,6 +25,7 @@
             data: JSON.stringify(),
             contentType: "application/json",
             success: function (resp) {
+
                     if(resp.mark=='1'){
                          $('#login').css('display','none')
                    $('#avatar').css('display','block')
@@ -44,14 +45,30 @@
 
     <title>Fanlin</title>
 
+ <style>
+
+      body {
+
+  overflow: hidden;
+}
+canvas {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+    z-index: -5;
+}
+
+    </style>
   </head>
 
-  <body style="background-color: #f5f5f5">
+  <body style="background-color: transparent">
 
-     <header style="margin-top: 84px">
+     <header style="margin-top: 84px;z-index: -3">
       <nav class="navbar navbar-expand-md navbar-dark fixed-top  container-fluid" style="opacity: 0.9;background: #212529;">
 
-          <a href="/" ><img src="../static/logo.png" href="http://127.0.0.1:5000/login" style="height: 68px;margin-right: 100px;margin-left: 180px"></a>
+          <a href="/" ><img src="{{ url_for('static',filename='logo.png') }}" href="http://127.0.0.1:5000/login" style="height: 68px;margin-right: 100px;margin-left: 180px"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -83,19 +100,19 @@
       </nav>
     </header>
 
-     <div class="col-lg-3 " style="display: inline-block;margin-top: 50px">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{ img_url }}" alt="Card image cap">
+     <div class="col-lg-3 " style="display: inline-block;margin-top: 50px;margin-left: 40px;">
+              <div class="card mb-4 box-shadow" style="background-color: transparent">
+                <img class="card-img-top" src="{{ img_url }}" alt="Card image cap" style="opacity: 0.7">
                 <div class="card-body">
-                  <p class="card-text">{{ pname }}</p>
-                    <p class="card-text">{{ songname }}</p>
+                  <p class="card-text" style="color: white">{{ pname }}</p>
+                    <p class="card-text" style="color: white">{{ songname }}</p>
                   <div class="d-flex justify-content-between align-items-center">
                    <div class="btn-group col-lg-11 row" role="group" aria-label="...">
-                      <audio src="{{ url }}" controls="controls" autoplay style="width: 100%">
+                      <audio src="{{ url }}" controls="controls" autoplay loop style="width: 100%">
                         </audio>
                     </div>
                       <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default " style="background: white;"><i class="fa fa-heart-o fa-lg"></i></button>
+
 
                         </div>
 
@@ -104,6 +121,11 @@
               </div>
             </div>
 
+     <canvas id=c></canvas>
+<img src="" >
+  <script src="{{ url_for('static', filename='js/dat.gui.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
 
     <!-- Optional JavaScript -->
@@ -111,7 +133,7 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 
 
   </body>

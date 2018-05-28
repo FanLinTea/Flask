@@ -91,3 +91,10 @@ def load_user(userid):
 #     id = db.Column(db.Integer, primary_key=True)
 #     mid = db.Column(db.Integer,db.ForeignKey('User.id'))
 #     uid = db.Column(db.Integer,nullable=False)
+
+
+class My_music(BaseModel,db.Model):
+    __tablename__ = 'mymusic'
+    id = db.Column(db.Integer, primary_key=True)
+    music_id = db.Column(db.Integer,nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)

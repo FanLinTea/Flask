@@ -12,7 +12,8 @@
 
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 
 
     <script type="text/javascript">
@@ -56,7 +57,7 @@
      <header style="margin-top: 84px">
       <nav class="navbar navbar-expand-md navbar-dark fixed-top  container-fluid" style="opacity: 0.98;background: #212529;">
 
-          <a href="/" ><img src="../static/logo.png" href="http://127.0.0.1:5000/login" style="height: 68px;margin-right: 100px;margin-left: 180px"></a>
+          <a href="/" ><img src="{{ url_for('static', filename='logo.png') }}" href="http://127.0.0.1:5000/login" style="height: 68px;margin-right: 100px;margin-left: 180px"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,7 +68,7 @@
               <a class="nav-link " href="#" style="width: 60px">Find <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item col-lg-4">
-              <a class="nav-link" href="#" style="width: 120px">My music</a>
+              <a class="nav-link" href="/mymusic" style="width: 120px">My music</a>
             </li>
             <li class="nav-item col-lg-4">
               <a class="nav-link " href="#" style="width: 120px">Shopping cart</a>
@@ -94,7 +95,7 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 
   </body>
 </html>
