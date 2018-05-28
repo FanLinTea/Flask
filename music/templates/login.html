@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 
     <title>Login</title>
   </head>
@@ -25,7 +25,7 @@
     {% endif %}
     <form class="form-signin col-lg-3 " style="margin:0px auto" action="/login" method="post">
       <div class="text-center mb-4">
-        <img class="mb-4" src="../static/logo.png" alt=""  height="180px" style="margin-top: 100px">
+        <img class="mb-4" src="{{ url_for('static', filename='logo.png') }}" alt=""  height="180px" style="margin-top: 100px">
 
 
       </div>
@@ -48,7 +48,7 @@
       </div>
          <button class="btn btn-outline-success my-2 my-sm-0 col-lg-12" type="submit" >Sign in</button>
         <div style="margin: 20px"></div>
-          <a href="http://127.0.0.1:5000/registered">Registered</a>
+          <a href="/registered">Registered</a>
 
       <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
     </form>
@@ -57,6 +57,6 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
   </body>
 </html>

@@ -20,7 +20,8 @@ def Home():
         url = 'http://localhost:3000/playlist/detail?id=2233124290'
         r_url = requests.get(url)
         data = r_url.json()
-        song_list =  data['result']['tracks']
+        print(data)
+        song_list =  data['playlist']['tracks']
         daysong = []
         daysong_dact = {}
         daysong1 = []
