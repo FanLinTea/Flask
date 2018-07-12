@@ -9,6 +9,7 @@ class Config:
     MAIL_USERNAME = '15811280010@163.com'
     MAIL_PASSWORD = 'wangyang1026'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_RECORD_QUERIES = True
     FLASKY_MAIL_SUBJECT_PREFIX = '[LuJiang]'
     FLASKY_MAIL_SENDER = '15811280010@163.com'
     # redis配置
@@ -22,7 +23,7 @@ class Config:
     PERMANENT_SESSION_LIFETIME = 24 * 3600 * 2  # session的有效时间,单位秒
 
 class TestConfig(Config):
-    DEBUG = True
+    DEBUG = False
     SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql@localhost:3306/test_music'
 
 class OutputConfig(Config):

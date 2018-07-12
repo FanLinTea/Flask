@@ -1,7 +1,7 @@
 # coding:utf8
 import redis
 from . import main
-from flask import render_template,request,jsonify
+from flask import render_template,request,jsonify,g,redirect
 import requests
 import random
 from flask_login import login_required,current_user
@@ -63,6 +63,8 @@ def Home():
     else:
         daysong_dact =eval(Music_REDIS.get('daysong_dact'))
         Billboard_list = eval(Music_REDIS.get('Billboard_list'))
+
+
 
     return render_template('Home.html', daysong_dact=daysong_dact,Billboard_list=Billboard_list)
     # return render_template('Home.html')
@@ -135,7 +137,11 @@ def collection():
 @login_required
 @main.route('/mymusic')
 def mymusic():
-    user_id = current_user.id
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        return redirect('/login')
+        print e
     id = My_music.query.filter_by(user_id=user_id).all()
     music_id = [a.music_id for a in id]
 

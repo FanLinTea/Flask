@@ -1,6 +1,6 @@
 #coding:utf8
 from . import auth
-from flask import render_template,request,jsonify,redirect,url_for
+from flask import render_template,request,jsonify,redirect,url_for,current_app,g,Response
 from music.models import User
 from music import db,login
 import re
@@ -53,7 +53,7 @@ def registered():
         verification = dict_data.get('verification')
 
         # 判断信息是否完整
-        if not all([email,password,verification]):
+        if not all([email,password]):
             return jsonify(erro='请完整填写信息')
 
         #  判断邮箱格式
@@ -148,7 +148,8 @@ def personal_x():
         if not avatar_url:
             avatar_url = '../static/timg.jpg'
             return jsonify(avatar_url=avatar_url)
-        return jsonify(avatar_url=avatar_url)
+        return jsonify(avatar_url=avatar_url),201
+
 
 @auth.route('/personal_b',methods=['POST','GET'])
 @login_required
@@ -178,4 +179,12 @@ def personal_b():
 
     return render_template('personal.html')
 
+class MyResponse(Response):
+    default_mimetype = ''
 
+@auth.route('/test2')
+def test2():
+    app = request.headers['Accept']
+    print app
+
+    return Response('ssss'),201,{'Content-Type': 'application/json'}

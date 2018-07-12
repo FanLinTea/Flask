@@ -2,8 +2,10 @@
 from music import create_app, db
 from flask_migrate import Migrate,MigrateCommand
 from flask_script import Manager
+from gevent import monkey
+from gevent.pywsgi import WSGIServer
 from music.models import User,Music,Collection  # 不导入模型类，将无法创建表，程序找不到
-
+monkey.patch_all()
 
 app = create_app('test')
 migrate = Migrate(app, db)
@@ -17,5 +19,6 @@ manager.add_command('db', MigrateCommand)  # 给命令行添加db命令，用来
 
 if __name__ == '__main__':
     # print app.url_map
-    manager.run()
-
+    # manager.run()
+    http_server = WSGIServer(('', 5000), app)
+    http_server.serve_forever()
